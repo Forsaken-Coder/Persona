@@ -4,153 +4,255 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cloud Computing Lab</title>
+    <title>CloudLab | Cloud Computing Fundamentals</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header>
-        <nav class="navbar">
-            <div class="logo">CloudLab</div>
+<header class="navbar">
 
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="logo">
+        Cloud<span>Lab</span>
+    </div>
 
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#services">Services</a>
+        <a href="#lab">Lab 03</a>
+        <a href="students.html">Students</a>
+        <a href="deployments.html">Deployments</a>
+    </nav>
 
-    <main>
-
-        <section id="home" class="hero">
-
-            <div class="hero-content">
-
-                <p class="tag">CLOUD COMPUTING FUNDAMENTALS</p>
-
-                <h1>
-                    Welcome to<br>
-                    <span>CloudLab</span>
-                </h1>
-
-                <p>
-                    A simple demonstration website created
-                    for Cloud Computing Lab 03.
-                </p>
-
-                <a href="#services" class="button">
-                    Explore Services
-                </a>
-
-            </div>
-
-        </section>
+</header>
 
 
-        <section id="services" class="section">
+<main>
 
-            <h2>Cloud Services</h2>
+<section class="hero">
 
-            <p class="section-text">
-                Cloud computing provides different service
-                models depending on the level of control
-                and management required.
-            </p>
+    <div class="hero-content">
 
-            <div class="cards">
-
-                <div class="card">
-                    <div class="icon">☁️</div>
-                    <h3>SaaS</h3>
-                    <p>
-                        Software as a Service provides
-                        applications through the internet.
-                    </p>
-                </div>
-
-
-                <div class="card">
-                    <div class="icon">⚙️</div>
-                    <h3>PaaS</h3>
-                    <p>
-                        Platform as a Service provides
-                        an environment for application deployment.
-                    </p>
-                </div>
-
-
-                <div class="card">
-                    <div class="icon">🖥️</div>
-                    <h3>IaaS</h3>
-                    <p>
-                        Infrastructure as a Service provides
-                        computing, networking and storage resources.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <section id="about" class="about">
-
-            <div>
-
-                <p class="tag">LAB 03</p>
-
-                <h2>Cloud Deployment</h2>
-
-                <p>
-                    This website demonstrates the deployment
-                    of a web project using a cloud platform.
-                    The project can be stored in GitHub and
-                    deployed through Netlify.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <section id="contact" class="section contact">
-
-            <h2>Contact</h2>
-
-            <p>
-                Cloud Computing Fundamentals
-            </p>
-
-            <p>
-                Department of Computer Science
-            </p>
-
-            <button onclick="showMessage()">
-                Test Website
-            </button>
-
-            <p id="message"></p>
-
-        </section>
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            © 2026 CloudLab | Cloud Computing Fundamentals
+        <p class="badge">
+            CNS 303 • Cloud Computing Fundamentals
         </p>
 
-    </footer>
+        <h1>
+            Learn Cloud.<br>
+            Build. Deploy.
+        </h1>
+
+        <p>
+            A practical Cloud Computing Lab 03 project
+            demonstrating SaaS, PaaS and IaaS concepts.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#services" class="btn primary">
+                Explore Services
+            </a>
+
+            <a href="#contact" class="btn secondary">
+                Contact Us
+            </a>
+        </div>
+
+    </div>
+
+</section>
 
 
-    <script src="script.js"></script>
+<section id="services" class="section">
+
+    <div class="section-title">
+
+        <p class="small-title">
+            CLOUD SERVICE MODELS
+        </p>
+
+        <h2>
+            Three layers of cloud computing
+        </h2>
+
+    </div>
+
+
+    <div class="cards">
+
+        <div class="card">
+
+            <div class="card-number">
+                01
+            </div>
+
+            <h3>
+                IaaS
+            </h3>
+
+            <p>
+                Infrastructure as a Service provides
+                virtualized computing resources such as
+                servers, storage and networking.
+            </p>
+
+        </div>
+
+
+        <div class="card featured">
+
+            <div class="card-number">
+                02
+            </div>
+
+            <h3>
+                PaaS
+            </h3>
+
+            <p>
+                Platform as a Service provides an environment
+                for developers to build, deploy and manage
+                applications.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                03
+            </div>
+
+            <h3>
+                SaaS
+            </h3>
+
+            <p>
+                Software as a Service provides complete
+                software applications through the internet.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="lab" class="lab-section">
+
+    <div>
+
+        <p class="small-title">
+            LAB 03
+        </p>
+
+        <h2>
+            SaaS + PaaS Implementation
+        </h2>
+
+        <p>
+            This project demonstrates Odoo Inventory as a
+            SaaS solution and Netlify as a PaaS deployment
+            platform.
+        </p>
+
+    </div>
+
+
+    <div class="lab-box">
+
+        <div>
+            <strong>Frontend</strong>
+            <span>HTML / CSS / JavaScript</span>
+        </div>
+
+        <div>
+            <strong>Backend</strong>
+            <span>Netlify Functions</span>
+        </div>
+
+        <div>
+            <strong>Database</strong>
+            <span>Supabase PostgreSQL</span>
+        </div>
+
+        <div>
+            <strong>Deployment</strong>
+            <span>Netlify + GitHub</span>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section id="contact" class="section contact-section">
+
+    <div class="section-title">
+
+        <p class="small-title">
+            DATABASE DEMO
+        </p>
+
+        <h2>
+            Contact CloudLab
+        </h2>
+
+        <p>
+            Submit this form to store a message in the
+            PostgreSQL database.
+        </p>
+
+    </div>
+
+
+    <form id="contactForm" class="contact-form">
+
+        <input
+            type="text"
+            id="contactName"
+            placeholder="Your Name"
+            required
+        >
+
+        <input
+            type="email"
+            id="contactEmail"
+            placeholder="Your Email"
+            required
+        >
+
+        <textarea
+            id="contactMessage"
+            placeholder="Your Message"
+            required
+        ></textarea>
+
+        <button type="submit" class="btn primary">
+            Send Message
+        </button>
+
+        <p id="contactStatus"></p>
+
+    </form>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 CloudLab — CNS 303 Cloud Computing Fundamentals
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
