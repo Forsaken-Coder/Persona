@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CloudLab | Deployments</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        Cloud<span>Lab</span>
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="students.html">
+            Students
+        </a>
+
+        <a href="deployments.html">
+            Deployments
+        </a>
+
+    </nav>
+
+</header>
+
+
+<section class="section">
+
+    <div class="section-title">
+
+        <p class="small-title">
+            PaaS DATABASE
+        </p>
+
+        <h2>
+            Deployments
+        </h2>
+
+    </div>
+
+
+    <form
+        id="deploymentForm"
+        class="contact-form"
+    >
+
+        <input
+            id="projectName"
+            type="text"
+            placeholder="Project Name"
+            required
+        >
+
+        <input
+            id="platform"
+            type="text"
+            value="Netlify"
+            placeholder="Platform"
+            required
+        >
+
+        <select
+            id="status"
+            style="
+                padding:15px;
+                background:#111;
+                color:white;
+                border:1px solid #333;
+            "
+        >
+
+            <option value="Deployed">
+                Deployed
+            </option>
+
+            <option value="Building">
+                Building
+            </option>
+
+            <option value="Failed">
+                Failed
+            </option>
+
+        </select>
+
+
+        <input
+            id="liveUrl"
+            type="url"
+            placeholder="Live Website URL"
+        >
+
+
+        <button
+            type="submit"
+            class="btn primary"
+        >
+            Add Deployment
+        </button>
+
+    </form>
+
+
+    <br><br>
+
+
+    <div id="deploymentList">
+
+        Loading deployments...
+
+    </div>
+
+
+</section>
+
+
+<script>
+
+const form =
+    document.getElementById(
+        "deploymentForm"
+    );
+
+
+const list =
+    document.getElementById(
+        "deploymentList"
+    );
+
+
+async function loadDeployments() {
+
+    const response =
+        await fetch(
+            "/.netlify/functions/deployments"
+        );
+
+
+    const deployments =
+        await response.json();
+
+
+    if (!deployments.length) {
+
+        list.innerHTML =
+            "<p>No deployments found.</p>";
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        deployments.map(item => `
+
+            <div class="card">
+
+                <h3>
+                    ${item.project_name}
+                </h3>
+
+                <p>
+                    Platform:
+                    ${item.platform}
+                </p>
+
+                <p>
+                    Status:
+                    ${item.status}
+                </p>
+
+                ${
+                    item.live_url
+                    ?
+                    `<p>
+                        <a
+                            href="${item.live_url}"
+                            target="_blank"
+                            style="color:#e50914"
+                        >
+                            Open Live Website
+                        </a>
+                    </p>`
+                    :
+                    ""
+                }
+
+            </div>
+
+        `).join("");
+
+}
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const deployment = {
+
+            project_name:
+                document.getElementById(
+                    "projectName"
+                ).value,
+
+            platform:
+                document.getElementById(
+                    "platform"
+                ).value,
+
+            status:
+                document.getElementById(
+                    "status"
+                ).value,
+
+            live_url:
+                document.getElementById(
+                    "liveUrl"
+                ).value
+
+        };
+
+
+        const response =
+            await fetch(
+                "/.netlify/functions/deployments",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            deployment
+                        )
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            alert(
+                result.error ||
+                "Failed to add deployment."
+            );
+
+            return;
+
+        }
+
+
+        form.reset();
+
+        loadDeployments();
+
+    }
+);
+
+
+loadDeployments();
+
+</script>
+
+
+</body>
+
+</html>
