@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CloudLab | Students</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        Cloud<span>Lab</span>
+    </div>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="students.html">
+            Students
+        </a>
+
+        <a href="deployments.html">
+            Deployments
+        </a>
+
+    </nav>
+
+</header>
+
+
+<section class="section">
+
+    <div class="section-title">
+
+        <p class="small-title">
+            DATABASE
+        </p>
+
+        <h2>
+            Students
+        </h2>
+
+    </div>
+
+
+    <form
+        id="studentForm"
+        class="contact-form"
+    >
+
+        <input
+            id="studentName"
+            type="text"
+            placeholder="Student Name"
+            required
+        >
+
+        <input
+            id="studentEmail"
+            type="email"
+            placeholder="Email"
+            required
+        >
+
+        <input
+            id="studentCourse"
+            type="text"
+            placeholder="Course"
+        >
+
+        <button
+            type="submit"
+            class="btn primary"
+        >
+            Add Student
+        </button>
+
+    </form>
+
+
+    <br><br>
+
+
+    <div id="studentsList">
+
+        Loading students...
+
+    </div>
+
+
+</section>
+
+
+<script>
+
+const form =
+    document.getElementById("studentForm");
+
+
+const list =
+    document.getElementById("studentsList");
+
+
+async function loadStudents() {
+
+    const response =
+        await fetch(
+            "/.netlify/functions/students"
+        );
+
+
+    const students =
+        await response.json();
+
+
+    if (!students.length) {
+
+        list.innerHTML =
+            "<p>No students found.</p>";
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        students.map(student => `
+
+            <div class="card">
+
+                <h3>
+                    ${student.name}
+                </h3>
+
+                <p>
+                    ${student.email}
+                </p>
+
+                <p>
+                    ${student.course || "N/A"}
+                </p>
+
+            </div>
+
+        `).join("");
+
+}
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const student = {
+
+            name:
+                document.getElementById(
+                    "studentName"
+                ).value,
+
+            email:
+                document.getElementById(
+                    "studentEmail"
+                ).value,
+
+            course:
+                document.getElementById(
+                    "studentCourse"
+                ).value
+
+        };
+
+
+        const response =
+            await fetch(
+                "/.netlify/functions/students",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(student)
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            alert(
+                result.error ||
+                "Failed to add student."
+            );
+
+            return;
+
+        }
+
+
+        form.reset();
+
+        loadStudents();
+
+    }
+);
+
+
+loadStudents();
+
+</script>
+
+
+</body>
+
+</html>
